@@ -27,7 +27,10 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/people', function(req, res) {
-  res.json({ people: _.values(people) });
+  Person.fetchAll().then(function(model) {
+    res.json(model);
+  });
+  // res.json({ people: _.values(people) });
 });
 
 
@@ -61,7 +64,7 @@ app.delete('/api/people/:id', function(req, res) {
 });
 
 // curl -X GET http://localhost:8000/api/people
-// curl -X POST --data "firstName=Whitney&lastName=Young&address=Chicago" http://localhost:8000/api/people
+// curl -X POST --data "firstName=Steve&lastName=Young&address=Portland" http://localhost:8000/api/people
 // curl -X GET http://localhost:8000/api/people
 // curl -X PUT --data "firstName=Whitney&lastName=Young&address=Portland" http://localhost:8000/api/people/1
 // curl -X GET http://localhost:8000/api/people
